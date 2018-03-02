@@ -1,7 +1,8 @@
 #!/bin/bash
+# 2018 iomonad - <me@trosa.io>
 
 if [ $# -eq 0 ]
-  then
+then
     echo "Usage: ./$0 <script>"
 	exit 0
 fi
