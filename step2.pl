@@ -32,3 +32,8 @@
 %% indices qu’on lui donne. L’idée c’est "j’ai une liste de maisons
 %% telle qu’un de ses éléments a telle et telle caractéristique, un
 %% autre de ses éléments a telle et telle caractéristique, etc."
+
+% Dans un premier temps, nous allons creer un structure categorisant
+% les informations sur chaques habitants.
+personne(0, []) :- !. % Exemple de guarde par default
+% Note: http://www.swi-prolog.org/pldoc/doc_for?object=!/0

@@ -69,7 +69,7 @@ beaupere_de(E, BP) :- enfant_de(BP, X), mari_de(E, X), homme(BP).
 % recherches recursives
 ancetre_de(A, E) :- enfant_de(E, A). % Condition simple
 % Connexion des branches en inconnu
-ancetre_de(A, E) :- enfant_de(E, X) , ancetre_de(A, X).
+ancetre_de(A, E) :- enfant_de(E, X), ancetre_de(A, X).
 
 % -?  ancetre_de(luc, paul). %% -> true
 % -?  ancetre_de(betty, jacques). %% -> true
