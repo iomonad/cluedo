@@ -53,6 +53,7 @@ femme_de(F, H) :- mari_de(H, F).
 enfant_de(E, P) :- member([E, P], [[jean, marc], [jules, marc], [leon, marc], [jacques, jules], [herve, leon], [paul, loic], [paul, leon], [valerie, loic], [jules, luc], [lisa, luc], [leon, luc], [sylvie, luc], [loic, luc], [gerard, luc]]).
 % Puis en determine la mere en utilisant le predicat mari_de
 enfant_de(E, P) :- mari_de(F, P), enfant_de(E, F).
+parent_de(X, Y) :- enfant_de(Y, X). % profitons ens
 
 % -? enfant_de(jules, marc). %% -> true
 % -? enfant_de(valerie, leon). %% -> true
@@ -60,10 +61,11 @@ enfant_de(E, P) :- mari_de(F, P), enfant_de(E, F).
 
 % Il est desormais possible de reutiliser les set de connaissances pour en
 % faire des predicats encore plus complexes en utilisant des conditions
-beaupere_de(E, BP) :- enfant_de(BP, F), mari_de(E, F), homme(BP).
-beaupere_de(E, BP) :- enfant_de(BP, X), mari_de(E, X), homme(BP).
+beaupere_de(X, Y) :- parent_de(Z, Y), mari_de(X, Z), homme(Y).
+bellemere_de(X, Y) :- parent_de(Z, Y), femme_de(Z, X), femme(Y).
 
-% todo ~ Fix beaupere
+% beaupere_de(loic, paul). %% -> true
+% beaupere_de(leon, paul). %% -> true
 
 % Il est possible d'utiliser des lambda pour executer des
 % recherches recursives

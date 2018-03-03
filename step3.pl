@@ -14,3 +14,7 @@
 % Regles de base:
 % chevre + loup -> impossible
 % chevre + chou -> impossible
+
+% fonction pour swap
+swap(a, b).
+swap(b, a).
