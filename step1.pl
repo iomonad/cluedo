@@ -26,12 +26,15 @@ femme(F) :- member(F, [anne, lisa, sylvie, julie, betty, eve, valerie]).
 
 % -? femme(eve). %% -> true
 % -? femme(karine). %% -> false
+% On encore en mappant une liste:
+% maplist(femme, [anne, betty, lisa, sylvie, julie, eve, valerie]). %% -> true
 
 % Creation base connaissance des hommes.
 homme(H) :- member(H, [jean, marc, jules, jacques, leon, herve, paul, luc, loic, gerard]).
 
 % -? homme(luc). %% -> true
 % -? homme(celestin). %% -> false
+% maplist(homme, [jean, marc, jules, paul, loic]). %% -> true
 
 % Generation des couples en utilisant des pseudos tuples
 mari_de(H, F) :- member([H, F], [[marc, anne], [jules, lisa], [leon, sylvie], [paul, julie], [luc, betty], [loic, eve]]).
@@ -62,7 +65,7 @@ beaupere_de(E, BP) :- enfant_de(BP, X), mari_de(E, X), homme(BP).
 
 % todo ~ Fix beaupere
 
-% Il est possible d'utiliser des lambda pour executer des recherches
+% Il est possible d'utiliser des lambda pour executer des
 % recherches recursives
 ancetre_de(A, E) :- enfant_de(E, A). % Condition simple
 % Connexion des branches en inconnu
