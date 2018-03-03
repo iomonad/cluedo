@@ -15,6 +15,47 @@
 % chevre + loup -> impossible
 % chevre + chou -> impossible
 
-% fonction pour swap
-swap(a, b).
-swap(b, a).
+% cc
+swap(gauche, droite).
+swap(droite, gauche).
+
+se_mouvoir([X, Loup, X, Chou], chevre,[Y, Loup, Y, Chou]) :-
+	swap(X, Y). % ------------------------------------------ %
+se_mouvoir([X, X, Chevre, Chou], loup, [Y, Y, Chevre, Chou]) :-
+	swap(X, Y). % ------------------------------------------ %
+se_mouvoir([X, Loup, Chevre, X], chou,[Y, Loup, Chevre, Y]) :-
+	swap(X, Y). % ------------------------------------------ %
+se_mouvoir([X, Loup, Chevre, Chou], peon_solo, [Y, Loup, Chevre, Chou]) :-
+	swap(X, Y). % ------------------------------------------ %
+
+% Positions possibles
+coexists(X, X, _).
+coexists(X, _, X).
+
+% Set de positions viables
+pas_de_carnage([Peon, Loup, Chevre, Chou]) :-
+	coexists(Peon, Chevre, Loup),
+	coexists(Peon, Chevre, Chou).
+
+% Etapes de la scene 🤔
+steps([droite, droite, droite, droite], []).
+steps(Berge, [Deplacement | ProchainDeplacements]) :-
+	se_mouvoir(Berge, Deplacement, ProchainMouvement), % Execute le mouvement
+	pas_de_carnage(ProchainMouvement), % Determine un mouvement viable
+	steps(ProchainMouvement, ProchainDeplacements). % as-tu vu la recursive ?
+
+% Display solution
+solution :-
+	length(Deplacements, 7), % Assertion
+	steps([gauche, gauche, gauche, gauche], Deplacements),
+	maplist(format("Deplacement: ~w~n"), Deplacements), !. % cuz design matter
+
+%% ?- solution.
+%% Deplacement: chevre
+%% Deplacement: peon_solo
+%% Deplacement: loup
+%% Deplacement: chevre
+%% Deplacement: chou
+%% Deplacement: peon_solo
+%% Deplacement: chevre
+%% true.
