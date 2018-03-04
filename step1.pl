@@ -50,7 +50,7 @@ femme_de(F, H) :- mari_de(H, F).
 % -? femme_de(julie, luc). %% -> false
 
 % Ici on reseigne les enfants des peres
-enfant_de(E, P) :- member([E, P], [[jean, marc], [jules, marc], [leon, marc], [jacques, jules], [herve, leon], [paul, loic], [paul, leon], [valerie, loic], [jules, luc], [lisa, luc], [leon, luc], [sylvie, luc], [loic, luc], [gerard, luc]]).
+enfant_de(E, P) :- member([E, P], [[jean, marc], [jules, marc], [leon, marc], [jacques, jules], [herve, leon], [paul, loic], [paul, leon], [valerie, loic], [jules, luc], [lisa, luc], [leon, luc], [loic, luc], [gerard, luc]]).
 % Puis en determine la mere en utilisant le predicat mari_de
 enfant_de(E, P) :- mari_de(F, P), enfant_de(E, F).
 parent_de(X, Y) :- enfant_de(Y, X). % profitons ens
